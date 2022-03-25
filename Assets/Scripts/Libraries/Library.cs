@@ -1,0 +1,67 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Descriptions;
+using Interfaces;
+using Sirenix.OdinInspector;
+using UnityEditor;
+using UnityEngine;
+
+namespace Libraries
+{
+    [Serializable]
+    public sealed class Library
+    {
+        [SerializeField] private List<Description> Descriptions = new();
+
+        private Dictionary<int, ICardDescription> _cardDescriptions = new();
+        private Dictionary<int, IGameDescription> _gameDescriptions = new();
+
+        public void Init()
+        {
+            foreach (var description in Descriptions)
+            {
+                switch (description.GetDescription)
+                {
+                    case ICardDescription data:
+                        _cardDescriptions.Add(description.GetDescription.Id, data);
+                        break;
+                    case IGameDescription data:
+                        _gameDescriptions.Add(description.GetDescription.Id, data);
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Используется ТОЛЬКО из редактора после добавления нового Discription в проект.
+        /// </summary>
+        [Button(ButtonSizes.Large), GUIColor(0.5f, 0.8f, 1f)]
+        public void CollectAllDescriptions()
+        {
+            Descriptions = AssetDatabase.FindAssets("t:Description")
+                .Select(AssetDatabase.GUIDToAssetPath)
+                .Select(AssetDatabase.LoadAssetAtPath<Description>).ToList();
+        }
+
+        public ICardDescription GetCardDescription(int id)
+        {
+            if (_cardDescriptions.TryGetValue(id, out var needed))
+            {
+                return needed;
+            }
+
+            throw new Exception($"Card description with id {id} not found");
+        }
+        public IGameDescription GetGameDescription(int id)
+        {
+            if (_gameDescriptions.TryGetValue(id, out var needed))
+            {
+                return needed;
+            }
+
+            throw new Exception($"Game description with id {id} not found");
+        }
+        
+    }
+}

@@ -53,7 +53,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 4864862535361568155}
   _textValue: {fileID: 7739426314612757046}
-  _countDuration: 1
+  _params:
+    Duration: 1
+    Delay: 0
+    Ease: 1
+    AddThousandsSeparator: 0
 --- !u!1 &4568912436188744556
 GameObject:
   m_ObjectHideFlags: 0

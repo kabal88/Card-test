@@ -17,3 +17,4 @@ MonoBehaviour:
     _minCardsOnStart: 4
     _maxCardsOnStart: 6
     _cardID: {fileID: 11400000, guid: 7661a0021c0f7c249909927144975533, type: 2}
+    _handID: {fileID: 11400000, guid: 537a8f07a77f5824298d239c2f748efc, type: 2}

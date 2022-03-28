@@ -13,6 +13,7 @@ namespace Controllers
         private Library _library;
         private Canvas _canvas;
         private SpriteLoader _spriteLoader;
+        private HandController _handController;
 
         private GameController(GameModel model, Canvas canvas, Library library)
         {
@@ -31,6 +32,8 @@ namespace Controllers
         public void StartGame()
         {
             ServiceLocator.SetService(InitSpriteLoader());
+
+            _handController = HandController.CreateInstance(_canvas, _library.GetHandDescription(_model.HandID));
             CreateCards();
         }
 
@@ -52,8 +55,11 @@ namespace Controllers
 
             for (var i = 0; i < quantity; i++)
             {
-                cards.Add(CardController.CreateCardController(description, _canvas.transform));
+                var card = CardController.CreateCardController(description, _handController.HandTransform);
+                cards.Add(card);
             }
+            
+            _handController.SetCardsInHand(cards);
         }
     }
 }

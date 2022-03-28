@@ -16,6 +16,7 @@ namespace Libraries
 
         private Dictionary<int, ICardDescription> _cardDescriptions = new();
         private Dictionary<int, IGameDescription> _gameDescriptions = new();
+        private Dictionary<int, IHandDescription> _handDescriptions = new();
 
         public void Init()
         {
@@ -28,6 +29,9 @@ namespace Libraries
                         break;
                     case IGameDescription data:
                         _gameDescriptions.Add(description.GetDescription.Id, data);
+                        break;
+                    case IHandDescription data:
+                        _handDescriptions.Add(description.GetDescription.Id,data);
                         break;
                 }
             }
@@ -53,6 +57,7 @@ namespace Libraries
 
             throw new Exception($"Card description with id {id} not found");
         }
+        
         public IGameDescription GetGameDescription(int id)
         {
             if (_gameDescriptions.TryGetValue(id, out var needed))
@@ -61,6 +66,16 @@ namespace Libraries
             }
 
             throw new Exception($"Game description with id {id} not found");
+        }
+        
+        public IHandDescription GetHandDescription(int id)
+        {
+            if (_handDescriptions.TryGetValue(id, out var needed))
+            {
+                return needed;
+            }
+
+            throw new Exception($"Hand description with id {id} not found");
         }
         
     }

@@ -1,4 +1,6 @@
-﻿using Interfaces;
+﻿using System;
+using DG.Tweening;
+using Interfaces;
 using Models;
 using Services;
 using UnityEngine;
@@ -10,7 +12,7 @@ namespace Controllers
     {
         private CardModel _model;
         private CardView _view;
-
+        
         private CardController(CardModel model, CardView view)
         {
             _model = model;
@@ -32,6 +34,26 @@ namespace Controllers
 
             view.SetPortrait(portrait);
             return new CardController(model, view);
+        }
+
+        public void SetPosition(Vector3 position, float duration)
+        {
+            _view.transform.DOMove(position, duration);
+        }
+
+        public void SetRotation(Quaternion rotation)
+        {
+            _view.transform.rotation = rotation;
+        }
+
+        public void SetRotation(Vector3 rotation, float duration)
+        {
+            _view.transform.DORotate(rotation, duration);
+        }
+
+        public void SetSorting(int order)
+        {
+            _view.SetSorting(order);
         }
     }
 }

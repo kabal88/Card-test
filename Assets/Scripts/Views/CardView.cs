@@ -2,6 +2,7 @@
 using Interfaces;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace View
@@ -15,6 +16,7 @@ namespace View
         [SerializeField] private Image _portrait;
         [SerializeField] private TextMeshProUGUI _title;
         [SerializeField] private TextMeshProUGUI _description;
+        [SerializeField] private Canvas _sorting;
 
         public void Init(CardData data)
         {
@@ -53,6 +55,21 @@ namespace View
         public void SetPortrait(Sprite sprite)
         {
             _portrait.sprite = sprite;
+        }
+
+        public void SetPosition(Vector3 position)
+        {
+            transform.position = position;
+        }
+
+        public void SetRotation(Quaternion rotation)
+        {
+            transform.rotation = rotation;
+        }
+
+        public void SetSorting(int order)
+        {
+            _sorting.sortingOrder = order;
         }
     }
 }

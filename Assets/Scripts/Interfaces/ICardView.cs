@@ -10,5 +10,8 @@ namespace Interfaces
         void SetHealth(int value);
         void SetAttack(int value);
         void SetPortrait(Sprite sprite);
+        void SetPosition(Vector3 position);
+        void SetRotation(Quaternion rotation);
+        void SetSorting(int order);
     }
 }

@@ -1,18 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
+using Enums;
+using Helpers;
 using Interfaces;
 using Models;
 using UnityEngine;
-using UnityEngine.UI;
 using View;
 
 namespace Controllers
 {
-    public class HandController
+    public class HandController : IDisposable
     {
+        public event Action SequenceComplete;
+        public event Action ExitSequence;
+
         private HandView _view;
         private HandModel _model;
-        private float duration = 1f;
+
+        private Stack<CardController> _cardsStack = new();
 
         public Transform HandTransform => _view.Hand;
 
@@ -22,12 +29,16 @@ namespace Controllers
             _model = model;
         }
 
-        public static HandController CreateInstance(Canvas canvas, IHandDescription description)
+        public static HandController CreateInstance(MainUI mainUI, IHandDescription description)
         {
-            var view = GameObject.Instantiate(description.Prefab, canvas.transform).GetComponent<HandView>();
+            var view = GameObject.Instantiate(description.Prefab, mainUI.Transform).GetComponent<HandView>();
             var model = description.GetModel;
 
-            return new HandController(view, model);
+            view.Init(model);
+
+            var controller = new HandController(view, model);
+
+            return controller;
         }
 
         public void SetCardsInHand(List<CardController> cards)
@@ -35,39 +46,117 @@ namespace Controllers
             for (var index = 0; index < cards.Count; index++)
             {
                 var card = cards[index];
+                card.Dead += RemoveCard;
+                card.DroppedOnTable += OnCardDroppedOnTable;
                 _model.AddCard(card);
-                card.SetSorting(cards.Count - index);
             }
 
+            UpdateView();
+        }
+
+        private void OnCardDroppedOnTable(CardController card)
+        {
+            _model.RemoveCard(card);
             UpdateView();
         }
 
         public void AddCard(CardController card)
         {
             _model.AddCard(card);
+            card.Dead += RemoveCard;
+            card.DroppedOnTable += OnCardDroppedOnTable;
             UpdateView();
         }
 
         public void RemoveCard(CardController card)
         {
             _model.RemoveCard(card);
+            card.Remove();
+            card.Dead -= RemoveCard;
+            card.DroppedOnTable -= OnCardDroppedOnTable;
             UpdateView();
         }
 
+        public void RemoveRightCard()
+        {
+            var card = _model.CardsInHand.First();
+            RemoveCard(card);
+        }
+
+        public void RandomSequence()
+        {
+            if (_model.CardsCount == 0)
+            {
+                ExitSequence?.Invoke();
+                return;
+            }
+
+            var sequence = DOTween.Sequence();
+            _cardsStack.Clear();
+
+            foreach (var card in _model.CardsInHand)
+            {
+                _cardsStack.Push(card);
+            }
+
+            for (var i = 0; i < _cardsStack.Count; i++)
+            {
+                sequence.AppendCallback(() => ChangeRandomState(_cardsStack.Pop()))
+                    .AppendInterval(_model.TweenRandomParams.Delay);
+            }
+
+            sequence.AppendCallback(OnSequenceComplete);
+        }
+
+        private void OnSequenceComplete()
+        {
+            SequenceComplete?.Invoke();
+        }
+
+        private void ChangeRandomState(CardController card)
+        {
+            var type = Randomizer.RandomEnumValue<StateType>();
+            var randomValue = Randomizer.RandomInt(_model.RandomMin, _model.RandomMax);
+            card.SetState(type, randomValue);
+        }
 
         private void UpdateView()
         {
-            var cards = _model.CardsInHand.ToArray();
-            var angle = _view.Angle / (_model.CardsCount - 1);
-            for (var i = 0; i < cards.Length; i++)
-            {
-                var angleTemp = angle * i + _view.AngleOffset;
-                var position = GetCardPosition(_view.Hand.position, angleTemp, _view.Radius);
-                cards[i].SetPosition(position, duration);
+            if (_model.CardsCount == 0)
+                return;
 
-                var rotation = GetVector3Rotation(_view.Hand.position, position);
-                cards[i].SetRotation(rotation, duration);
+            var cards = _model.CardsInHand.ToArray();
+            var angle = _view.Angle;
+
+            if (_model.CardsCount > 1)
+            {
+                angle /= (_model.CardsCount - 1);
+
+                for (var i = 0; i < cards.Length; i++)
+                {
+                    var card = cards[i];
+                    var angleTemp = angle * i + _view.AngleOffset;
+                    UpdatePositionAndRotationOfCard(card, angleTemp);
+                    card.SetSorting(cards.Length - i);
+                }
             }
+            else
+            {
+                angle /= 2;
+                var angleTemp = angle + _view.AngleOffset;
+                UpdatePositionAndRotationOfCard(cards[0], angleTemp);
+                cards[0].SetSorting(0);
+            }
+        }
+
+        private void UpdatePositionAndRotationOfCard(CardController card, float angle)
+        {
+            var handPosition = _view.Hand.position;
+            var position = GetCardPosition(handPosition, angle, _view.Radius);
+            card.SetPosition(position, _model.TweenRandomParams.Duration);
+
+            var rotation = GetVector3Rotation(handPosition, position);
+            card.SetRotation(rotation, _model.TweenRandomParams.Duration);
         }
 
         private Vector3 GetCardPosition(Vector3 originPosition, float angle, float radius)
@@ -102,6 +191,16 @@ namespace Controllers
         {
             var result = GetQuaternionRotation(from, to).eulerAngles;
             return result;
+        }
+
+        public void Dispose()
+        {
+            foreach (var card in _model.CardsInHand)
+            {
+                card.Dead -= RemoveCard;
+                card.DroppedOnTable -= OnCardDroppedOnTable;
+                card.Dispose();
+            }
         }
     }
 }

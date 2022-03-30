@@ -2,7 +2,7 @@
 using UnityEngine;
 using View;
 
-namespace Helper
+namespace Helpers
 {
     [CustomEditor(typeof(HandView))]
     public class HandViewEditor : Editor
@@ -22,16 +22,30 @@ namespace Helper
                 _handView.Radius);
 
             Handles.color = Color.magenta;
-            var angle = _handView.Angle / (_handView.CardCount - 1);
-            for (var i = 0; i < _handView.CardCount; i++)
+            var angle = _handView.Angle;
+
+            if (_handView.CardCount > 1)
             {
-                var angleTemp = angle * i + _handView.AngleOffset;
+                angle /= (_handView.CardCount - 1);
+
+                for (var i = 0; i < _handView.CardCount; i++)
+                {
+                    var angleTemp = angle * i + _handView.AngleOffset;
+                    var pointPos = (Vector3) GetPoint(angleTemp, _handView.Radius);
+                    var position = _handView.transform.position + pointPos;
+                    Handles.DrawSolidDisc(position, Vector3.forward, 0.1f);
+                }
+            }
+            else if (_handView.CardCount == 1)
+            {
+                angle /= 2;
+                var angleTemp = angle + _handView.AngleOffset;
                 var pointPos = (Vector3) GetPoint(angleTemp, _handView.Radius);
                 var position = _handView.transform.position + pointPos;
                 Handles.DrawSolidDisc(position, Vector3.forward, 0.1f);
             }
         }
-        
+
         private Vector2 GetPoint(float angle, float radius)
         {
             angle *= Mathf.Deg2Rad;

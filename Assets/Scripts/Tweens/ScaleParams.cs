@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DroneBase.Tweens
+namespace Tweens
 {
     [Serializable]
     public sealed class ScaleParams : TweenParams

@@ -15,3 +15,10 @@ MonoBehaviour:
   description:
     _id: {fileID: 11400000, guid: 537a8f07a77f5824298d239c2f748efc, type: 2}
     _prefab: {fileID: 891754419322400119, guid: aec5ceebd7ef45b4b85d2551be094e82, type: 3}
+    _randomTweenParams:
+      Duration: 1
+      Delay: 1
+      Ease: 6
+    _randomRange:
+      Min: -2
+      Max: 9

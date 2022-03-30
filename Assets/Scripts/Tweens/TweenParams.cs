@@ -2,7 +2,7 @@
 using DG.Tweening;
 
 
-namespace DroneBase.Tweens
+namespace Tweens
 {
     [Serializable]
     public class TweenParams

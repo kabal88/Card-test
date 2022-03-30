@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 426034422588357165}
-  - component: {fileID: 5391687556902806891}
   m_Layer: 5
   m_Name: StatePanel
   m_TagString: Untagged
@@ -39,25 +38,6 @@ RectTransform:
   m_AnchoredPosition: {x: -100, y: -174}
   m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &5391687556902806891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4312783615593873233}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b45b06504cf34113b18722ec24e49bdd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _icon: {fileID: 4864862535361568155}
-  _textValue: {fileID: 7739426314612757046}
-  _params:
-    Duration: 1
-    Delay: 0
-    Ease: 1
-    AddThousandsSeparator: 0
 --- !u!1 &4568912436188744556
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,6 +49,7 @@ GameObject:
   - component: {fileID: 1830076119935277915}
   - component: {fileID: 1112619835612071217}
   - component: {fileID: 4864862535361568155}
+  - component: {fileID: 1927454150396621964}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -134,6 +115,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1927454150396621964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4568912436188744556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471f171cd7c34738ae95806fdd9c0ebc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7792070647139201472
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,6 +138,7 @@ GameObject:
   - component: {fileID: 8328331029863485150}
   - component: {fileID: 5030136797486038860}
   - component: {fileID: 7739426314612757046}
+  - component: {fileID: 6173441671345073074}
   m_Layer: 5
   m_Name: ValueText (TMP)
   m_TagString: Untagged
@@ -271,3 +265,15 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6173441671345073074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7792070647139201472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf45fd82613440d68952f9d044ea3553, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -19,5 +19,10 @@ MonoBehaviour:
       Health: 5
       Mana: 4
       Attack: 11
-    _title: 
-    _description: 
+    _title: Some title
+    _description: Some description about card
+    _dragSettings:
+      LayerMask:
+        serializedVersion: 2
+        m_Bits: 64
+      DraggingSortingOrder: 100

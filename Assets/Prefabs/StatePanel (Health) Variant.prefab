@@ -93,7 +93,59 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4312783615593873233, guid: f6c548b817b221f45a80fb1f8c79dbc5, type: 3}
       propertyPath: m_Name
-      value: StatePanel (Health)
+      value: StatePanel (Health) Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6c548b817b221f45a80fb1f8c79dbc5, type: 3}
+--- !u!114 &2272273645008668559 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7739426314612757046, guid: f6c548b817b221f45a80fb1f8c79dbc5, type: 3}
+  m_PrefabInstance: {fileID: 8426036909195957689}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3993634445144983586 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4864862535361568155, guid: f6c548b817b221f45a80fb1f8c79dbc5, type: 3}
+  m_PrefabInstance: {fileID: 8426036909195957689}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5707571680938584808 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4312783615593873233, guid: f6c548b817b221f45a80fb1f8c79dbc5, type: 3}
+  m_PrefabInstance: {fileID: 8426036909195957689}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-5305831179168316564
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5707571680938584808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7de0edffae1a4c1787d18b85873dda47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 3993634445144983586}
+  _textValue: {fileID: 2272273645008668559}
+  _params:
+    Duration: 1
+    Delay: 0
+    Ease: 1
+    AddThousandsSeparator: 0
+  _scale:
+    Duration: 1
+    Delay: 0
+    Ease: 6
+    Target: 1
+    StartScale: 1.3

@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: -3000}
+  m_AnchoredPosition: {x: 0, y: -2900}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7412408885354872866
@@ -51,9 +51,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _radius: 30
-  _angle: 20
+  _angleNormal: 20
+  _angleSmall: 10
+  _cardsInHandForNormalAngle: 4
   cardCount: 4
-  _angleOffset: 80
   _hand: {fileID: 3765954982110058975}
 --- !u!1 &4401381211769016580
 GameObject:

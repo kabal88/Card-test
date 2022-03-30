@@ -493,6 +493,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1940477551}
     m_Modifications:
+    - target: {fileID: 964612823789926746, guid: 86d66dd6253be854b9d1eb5ab10a65d9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 964612824135571032, guid: 86d66dd6253be854b9d1eb5ab10a65d9, type: 3}
       propertyPath: m_Name
       value: Buttons
@@ -580,6 +584,14 @@ PrefabInstance:
     - target: {fileID: 964612824135571033, guid: 86d66dd6253be854b9d1eb5ab10a65d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964612824671592654, guid: 86d66dd6253be854b9d1eb5ab10a65d9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 964612825105633800, guid: 86d66dd6253be854b9d1eb5ab10a65d9, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.0000076293945
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86d66dd6253be854b9d1eb5ab10a65d9, type: 3}

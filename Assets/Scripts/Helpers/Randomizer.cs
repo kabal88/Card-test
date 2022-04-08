@@ -6,7 +6,7 @@ namespace Helpers
     public static class Randomizer
     {
         /// <summary>
-        /// Random enum value. First member (usually "None") exclusive.
+        /// Random enum value. First member (usually "None") exclude.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>

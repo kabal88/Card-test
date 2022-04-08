@@ -39,10 +39,10 @@ namespace Services
         {
             _fixUpdatables.ForEach(x => x.FixedUpdateLocal());
             
-            // foreach (var updatable in _fixUpdatables)
-            // {
-            //     updatable.FixedUpdateLocal();
-            // }
+            foreach (var updatable in _fixUpdatables)
+            {
+                updatable.FixedUpdateLocal();
+            }
         }
     }
 }

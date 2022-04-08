@@ -38,9 +38,9 @@ namespace Libraries
         }
 
         /// <summary>
-        /// Используется ТОЛЬКО из редактора после добавления нового Discription в проект.
+        /// Work ONLY from Editor. Use after adding new Description to project. 
         /// </summary>
-        [Button(ButtonSizes.Large), GUIColor(0.5f, 0.8f, 1f)]
+        [Button(ButtonSizes.Large), GUIColor(0.5f, 0.8f, 1f), PropertyTooltip("Click after adding new Description to project.")]
         public void CollectAllDescriptions()
         {
             Descriptions = AssetDatabase.FindAssets("t:Description")

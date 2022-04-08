@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Identifier
@@ -6,16 +7,16 @@ namespace Identifier
     [CreateAssetMenu]
     public class IdentifierContainer : ScriptableObject, IIdentifier
     {
-        [SerializeField, HideInInspector] private int ID;
+        [SerializeField, ReadOnly] private int _id;
     
         public int Id
         {
             get
             {
-                if (ID == 0)
-                    ID = Animator.StringToHash(name); 
+                if (_id == 0)
+                    _id = Animator.StringToHash(name); 
 
-                return ID;
+                return _id;
             }
         }
     }
